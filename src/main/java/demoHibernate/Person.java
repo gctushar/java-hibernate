@@ -1,7 +1,12 @@
 package demoHibernate;
 
-public class Alien {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Person {
+
+    @Id
     private int aid;
     private String aname;
     private String color;
