@@ -1,7 +1,8 @@
 package demoHibernate;
 
-import demoHibernate.model.Person;
-import demoHibernate.model.PersonName;
+import demoHibernate.model.Course;
+import demoHibernate.model.Student;
+import demoHibernate.model.StudentName;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -11,8 +12,9 @@ public class HibernateConfig {
 
     private HibernateConfig() {
         sessionFactory = new Configuration().configure()
-                .addAnnotatedClass(Person.class)
-                .addAnnotatedClass(PersonName.class)
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(StudentName.class)
+                .addAnnotatedClass(Course.class)
                 .buildSessionFactory();
     }
 

@@ -1,28 +1,35 @@
 package demoHibernate;
 
-import demoHibernate.model.Person;
-import demoHibernate.model.PersonName;
+import demoHibernate.model.Course;
+import demoHibernate.model.Student;
+import demoHibernate.model.StudentName;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class App {
 
-
     public static void main(String[] args) {
 
-        Person gautam = new Person();
+        Student gautam = new Student();
 
-        PersonName personName = new PersonName();
-        personName.setfName("Gautam");
-        personName.setlName("Chakraborty");
-        gautam.setaPersonName(personName);
-        gautam.setAid(105);
+        StudentName studentName = new StudentName("Gautam","Chakraborty");
+        Course physics = new Course("Physics",1001);
+        Course cse = new Course("CSE",5001);
+        Course eee = new Course("EEE",5002);
 
-        gautam.setColor("Grexxen");
+        gautam.setStudentName(studentName);
+        gautam.setSex("Male");
+        gautam.getCourse().add(physics);
+        gautam.getCourse().add(cse);
+        gautam.getCourse().add(eee);
+
 
         Session session = HibernateConfig.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
-        session.save(personName);
+        session.save(studentName);
+        session.save(physics);
+        session.save(cse);
+        session.save(eee);
         session.save(gautam);
 
 

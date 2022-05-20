@@ -7,14 +7,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class PersonName {
+public class StudentName {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     @Column(name = "firstName")
     private String fName;
     private String lName;
+
+    public StudentName() {
+    }
+
+    public StudentName(String fName, String lName) {
+        this.id = id;
+        this.fName = fName;
+        this.lName = lName;
+    }
 
     public int getId() {
         return id;
