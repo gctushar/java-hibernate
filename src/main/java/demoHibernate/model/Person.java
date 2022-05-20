@@ -1,11 +1,11 @@
-package demoHibernate;
+package demoHibernate.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity(name = "person")
@@ -15,9 +15,9 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int aid;
-    @Column(name = "person_name")
-    private String aname;
-//    @Transient
+//    @OneToOne
+    @Transient
+    private PersonName aPersonName;
     @Column(name = "fcolor")
     private String color;
 
@@ -29,12 +29,12 @@ public class Person {
         this.aid = aid;
     }
 
-    public String getAname() {
-        return aname;
+    public PersonName getaPersonName() {
+        return aPersonName;
     }
 
-    public void setAname(String aname) {
-        this.aname = aname;
+    public void setaPersonName(PersonName aPersonName) {
+        this.aPersonName = aPersonName;
     }
 
     public String getColor() {
@@ -46,11 +46,13 @@ public class Person {
     }
 
 
+
+
     @Override
     public String toString() {
         return "Person{" +
                 "aid=" + aid +
-                ", aname='" + aname + '\'' +
+                ", aname='" + aPersonName + '\'' +
                 ", color='" + color + '\'' +
                 '}';
     }
