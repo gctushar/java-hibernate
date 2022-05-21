@@ -1,5 +1,9 @@
 package demoHibernate.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "student")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 //@Table(name = "someting")
 public class Student {
 

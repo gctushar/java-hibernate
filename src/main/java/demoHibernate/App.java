@@ -49,7 +49,7 @@ public class App {
 
         Student getPerson = session.get(Student.class, 7);
         System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
-
+//
         getPerson.setSex("nooooo");
         session.update(getPerson);
 
