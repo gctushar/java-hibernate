@@ -6,6 +6,8 @@ import demoHibernate.model.StudentName;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import org.hibernate.Query;
+
 public class App {
 
 
@@ -73,6 +75,16 @@ public class App {
         getPerson = session2.get(Student.class, 7);
         System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
 
+
+        Query query = session2.createQuery("from student where id = 7");
+        query.setCacheable(true);
+        getPerson =(Student) query.uniqueResult();
+        System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
+
+        Query query2 = session2.createQuery("from student where id = 7");
+        query2.setCacheable(true);
+        getPerson =(Student) query2.uniqueResult();
+        System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
 
         tx2.commit();
         session2.close();
