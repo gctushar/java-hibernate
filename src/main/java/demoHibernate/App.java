@@ -8,34 +8,51 @@ import org.hibernate.Transaction;
 
 public class App {
 
+
     public static void main(String[] args) {
 
-        Student gautam = new Student();
 
-        StudentName studentName = new StudentName("Gautam","Chakraborty");
+        StudentName studentGC = new StudentName("Gautam","Chakraborty");
+        StudentName studentJC = new StudentName("Jackie","Chan");
+
         Course physics = new Course("Physics",1001);
         Course cse = new Course("CSE",5001);
         Course eee = new Course("EEE",5002);
+        Course algo = new Course("Algo",5003);
 
-        gautam.setStudentName(studentName);
+        Student gautam = new Student();
+        Student jakie = new Student();
+
+        gautam.setStudentName(studentGC);
         gautam.setSex("Male");
         gautam.getCourse().add(physics);
         gautam.getCourse().add(cse);
-        gautam.getCourse().add(eee);
+
+        jakie.setStudentName(studentJC);
+        jakie.setSex("n/a");
+        jakie.getCourse().add(eee);
+        jakie.getCourse().add(algo);
 
 
         Session session = HibernateConfig.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
-        session.save(studentName);
-        session.save(physics);
-        session.save(cse);
-        session.save(eee);
-        session.save(gautam);
+
+//        session.save(studentGC);
+//        session.save(studentJC);
+//        session.save(physics);
+//        session.save(cse);
+//        session.save(eee);
+//        session.save(algo);
+//        session.save(gautam);
+//        session.save(jakie);
 
 
-//        System.out.println("\n\n\n");
-//        Person getPerson = session.get(Person.class, 1);
-//        System.out.println(getPerson);
+        Student getPerson = session.get(Student.class, 7);
+        System.out.println(getPerson.getStudentName());
+
+        System.out.println("\n");
+
+        System.out.println(getPerson.getCourse().size());
         tx.commit();
 
         HibernateConfig.getSessionFactory().close();

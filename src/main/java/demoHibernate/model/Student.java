@@ -2,6 +2,7 @@ package demoHibernate.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +18,11 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private StudentName studentName;
     @Column(name = "sex")
     private String sex;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Course> course = new ArrayList<>();
 
 
@@ -55,5 +56,15 @@ public class Student {
 
     public void setCourse(ArrayList<Course> course) {
         this.course = course;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", studentName=" + studentName +
+                ", sex='" + sex + '\'' +
+                ", course=" + course +
+                '}';
     }
 }
