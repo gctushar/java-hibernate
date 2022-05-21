@@ -48,12 +48,34 @@ public class App {
 
 
         Student getPerson = session.get(Student.class, 7);
-        System.out.println(getPerson.getStudentName());
+        System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
+
+        getPerson.setSex("nooooo");
+        session.update(getPerson);
+
+        getPerson = session.get(Student.class, 8);
+        System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
+
+        getPerson = session.get(Student.class, 7);
+        System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
 
         System.out.println("\n");
 
         System.out.println(getPerson.getCourse().size());
+
         tx.commit();
+        session.close();
+
+
+        Session session2 = HibernateConfig.getSessionFactory().openSession();
+        Transaction tx2 =  session2.beginTransaction();
+
+        getPerson = session2.get(Student.class, 7);
+        System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
+
+
+        tx2.commit();
+        session2.close();
 
         HibernateConfig.getSessionFactory().close();
     }
