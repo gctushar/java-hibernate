@@ -5,8 +5,8 @@ import demoHibernate.model.Student;
 import demoHibernate.model.StudentName;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import org.hibernate.Query;
 
 public class App {
 
@@ -85,6 +85,11 @@ public class App {
         query2.setCacheable(true);
         getPerson =(Student) query2.uniqueResult();
         System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
+
+
+
+
+
 
         tx2.commit();
         session2.close();
