@@ -3,6 +3,7 @@ package demoHibernate;
 import demoHibernate.model.Course;
 import demoHibernate.model.Student;
 import demoHibernate.model.StudentName;
+import demoHibernate.model.TempCourse;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -15,6 +16,7 @@ public class HibernateConfig {
                 .addAnnotatedClass(Student.class)
                 .addAnnotatedClass(StudentName.class)
                 .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(TempCourse.class)
                 .buildSessionFactory();
     }
 

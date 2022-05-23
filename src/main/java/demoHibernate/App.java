@@ -3,9 +3,15 @@ package demoHibernate;
 import demoHibernate.model.Course;
 import demoHibernate.model.Student;
 import demoHibernate.model.StudentName;
+import demoHibernate.model.TempCourse;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class App {
@@ -53,10 +59,14 @@ public class App {
         System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
 //
         getPerson.setSex("nooooo");
-        session.update(getPerson);
+//        session.update(getPerson);
 
         getPerson = session.get(Student.class, 8);
         System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
+        getPerson.setSex("8 change");
+
+        getPerson = session.get(Student.class, 8);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>" + getPerson.getStudentName() + " " + getPerson.getSex());
 
         getPerson = session.get(Student.class, 7);
         System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
@@ -87,8 +97,23 @@ public class App {
         System.out.println(getPerson.getStudentName() + " " + getPerson.getSex());
 
 
+        NativeQuery nativeQuery = session2.createNativeQuery("Select courseName,courseCode from Course");
+//        nativeQuery.addEntity(TempCourse.class);
+//        nativeQuery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+
+        List<Object[]> tempCourses = nativeQuery.getResultList();
+
+        for (Object o[] : tempCourses){
+            System.out.println(new TempCourse((String) o[0],(int) o[1]));
+        }
 
 
+        NativeQuery query1 = session2.createNativeQuery("Select courseName,courseCode from Course" , "TempCourseMap");
+        List<TempCourse> resultList = nativeQuery.getResultList();
+
+        for (TempCourse course: resultList){
+            System.out.println(course);
+        }
 
 
         tx2.commit();
